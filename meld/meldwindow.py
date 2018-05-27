@@ -127,6 +127,8 @@ class MeldWindow(Component):
             name="Recent",  label=_("Open Recent"),
             tooltip=_("Open recent files"), stock_id=None)
         recent_action.set_show_private(True)
+        recent_action.set_limit(20)
+        recent_action.set_show_numbers(True)
         recent_action.set_filter(recent_comparisons.recent_filter)
         recent_action.set_sort_type(Gtk.RecentSortType.MRU)
         recent_action.connect("item-activated", self.on_action_recent)
