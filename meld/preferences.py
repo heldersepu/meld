@@ -184,7 +184,7 @@ class PreferencesDialog(Component):
     def __init__(self, parent):
         Component.__init__(
             self, "preferences.ui", "preferencesdialog", [
-                "adjustment1", "adjustment2", "fileorderstore",
+                "adjustment1", "adjustment2", "adjustment3", "fileorderstore",
                 "sizegroup_editor", "timestampstore", "mergeorderstore",
                 "sizegroup_file_order_labels", "sizegroup_file_order_combos",
                 "syntaxschemestore"
@@ -192,6 +192,8 @@ class PreferencesDialog(Component):
         self.widget.set_transient_for(parent)
 
         bindings = [
+            ('recent-action-limit', self.spinbutton_open_recent_count, 'value'),
+            ('recent-action-show-numbers', self.recent_show_numbers_checkbutton, 'active'),
             ('use-system-font', self.checkbutton_default_font, 'active'),
             ('custom-font', self.fontpicker, 'font'),
             ('indent-width', self.spinbutton_tabsize, 'value'),
