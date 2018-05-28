@@ -36,9 +36,13 @@ class MeldSettings(GObject.GObject):
 
     def __init__(self):
         GObject.GObject.__init__(self)
+        self.recent_action_limit = 20
+        self.recent_action_show_numbers = True
         self.on_setting_changed(settings, 'filename-filters')
         self.on_setting_changed(settings, 'text-filters')
         self.on_setting_changed(settings, 'use-system-font')
+        self.on_setting_changed(settings, 'recent-action-limit')
+        self.on_setting_changed(settings, 'recent-action-show-numbers')
         self.style_scheme = self._style_scheme_from_gsettings()
         settings.connect('changed', self.on_setting_changed)
 
@@ -54,9 +58,15 @@ class MeldSettings(GObject.GObject):
         elif key in ('use-system-font', 'custom-font'):
             self.font = self._current_font_from_gsetting()
             self.emit('changed', 'font')
-        elif key in ('style-scheme'):
+        elif key == 'style-scheme':
             self.style_scheme = self._style_scheme_from_gsettings()
             self.emit('changed', 'style-scheme')
+        elif key == 'recent-action-limit':
+            self.recent_action_limit = settings.get_int('recent-action-limit')
+            self.emit('changed', 'recent-action-limit')
+        elif key == 'recent-action-show-numbers':
+            self.recent_action_show_numbers = settings.get_boolean('recent-action-show-numbers')
+            self.emit('changed', 'recent-action-show-numbers')
 
     def _style_scheme_from_gsettings(self):
         manager = GtkSource.StyleSchemeManager.get_default()
