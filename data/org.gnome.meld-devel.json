@@ -25,18 +25,13 @@
       "V": "1"
     }
   },
-  "rename-appdata-file": "meld.appdata.xml",
-  "rename-desktop-file": "meld.desktop",
-  "rename-icon": "meld",
   "finish-args": [
-    /* X11 + XShm */
-    "--share=ipc", "--socket=x11",
-    /* Wayland */
+    "--share=ipc",
+    "--socket=x11",
     "--socket=wayland",
-    /* Filesystem */
     "--filesystem=host",
-    /* dconf */
-    "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+    "--talk-name=ca.desrt.dconf",
+    "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
   ],
   "modules": [
     {

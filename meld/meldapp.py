@@ -111,7 +111,7 @@ class MeldApp(Gtk.Application):
         meld.preferences.PreferencesDialog(self.get_active_window())
 
     def help_callback(self, action, parameter):
-        if meld.conf.UNINSTALLED:
+        if meld.conf.DATADIR_IS_UNINSTALLED:
             uri = "http://meldmerge.org/help/"
         else:
             uri = "help:meld"
@@ -333,7 +333,7 @@ class MeldApp(Gtk.Application):
 
         tab = None
         error = None
-        comparisons = [args] + options.diff
+        comparisons = [c for c in [args] + options.diff if c]
 
         # Every Meld invocation creates at most one window. If there is
         # no existing application, a window is created in do_startup().
